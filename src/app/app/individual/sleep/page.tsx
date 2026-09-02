@@ -11,6 +11,7 @@ import { useUIStore } from '@/lib/store';
 import { getLocalTodayDateString } from '@/lib/date-utils';
 import { connectHeartRateMonitor, isBluetoothSupported } from '@/lib/bluetooth';
 import { SleepLog } from '@/lib/types';
+import { syncSleepLog } from '@/lib/supabase-sync';
 import {
   Moon,
   Sun,
@@ -97,6 +98,10 @@ export default function SleepTrackerPage() {
       localStorage.setItem(storageKey, JSON.stringify(updated));
       return updated;
     });
+
+    if (profile?.id) {
+      syncSleepLog(newLog, profile.id);
+    }
     setActiveSleep(null);
   };
 

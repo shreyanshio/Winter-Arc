@@ -69,6 +69,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       setUser(session.user);
 
+      // Extract Google full name and PFP
+      const meta = session.user.user_metadata || {};
+      const googleName = meta.full_name || meta.name || session.user.email?.split('@')[0] || 'Challenger';
+      const googlePfp = meta.avatar_url || meta.picture || null;
+
       // Fetch profile
       const { data: profileData } = await supabase
         .from('profiles')
@@ -76,20 +81,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .eq('id', session.user.id)
         .single();
 
-      if (profileData) {
-        setProfile(profileData);
-      } else {
-        const newProfile: Profile = {
-          id: session.user.id,
-          display_name: session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'Challenger',
-          avatar_url: session.user.user_metadata?.avatar_url || null,
-          timezone: getBrowserTimezone(),
-          challenge_started_at: new Date().toISOString(),
-          body_weight_kg: 70,
-        };
-        await supabase.from('profiles').insert([newProfile]);
-        setProfile(newProfile);
+      const profilePayload: Profile = {
+        id: session.user.id,
+        display_name: profileData?.display_name || googleName,
+        avatar_url: googlePfp || profileData?.avatar_url || null,
+        timezone: profileData?.timezone || getBrowserTimezone(),
+        challenge_started_at: profileData?.challenge_started_at || new Date().toISOString(),
+        body_weight_kg: profileData?.body_weight_kg || 70,
+      };
+
+      try {
+        await supabase.from('profiles').upsert(profilePayload, { onConflict: 'id' });
+      } catch (upsertErr) {
+        console.warn('Profile upsert warning:', upsertErr);
       }
+
+      setProfile(profilePayload);
 
       // Fetch commitments
       const { data: commitData } = await supabase
@@ -108,6 +115,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     refreshUserData();
+
+    if (supabase) {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+        if (session?.user) {
+          setUser(session.user);
+          const meta = session.user.user_metadata || {};
+          const googleName = meta.full_name || meta.name || session.user.email?.split('@')[0] || 'Warrior';
+          const googlePfp = meta.avatar_url || meta.picture || null;
+
+          const updated: Profile = {
+            id: session.user.id,
+            display_name: googleName,
+            avatar_url: googlePfp,
+            timezone: getBrowserTimezone(),
+            challenge_started_at: new Date().toISOString(),
+            body_weight_kg: 70,
+          };
+
+          try {
+            await supabase.from('profiles').upsert(updated, { onConflict: 'id' });
+          } catch (e) {
+            // Ignore
+          }
+          setProfile(updated);
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null);
+          setProfile(null);
+          setCommitments([]);
+        }
+        setIsLoading(false);
+      });
+
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
   }, []);
 
   const signUpWithEmail = async (email: string, pass: string, displayName: string): Promise<{ success: boolean; error?: string }> => {

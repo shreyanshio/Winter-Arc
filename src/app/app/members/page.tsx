@@ -239,7 +239,7 @@ export default function MembersDirectoryPage() {
                   {/* User Header */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <AvatarBadge name={member.profile.display_name} size="md" />
+                      <AvatarBadge name={member.profile.display_name} avatarUrl={member.profile.avatar_url} size="md" />
                       <div>
                         <h3 className="text-sm font-bold text-white font-mono flex items-center gap-1.5">
                           <span>{member.profile.display_name}</span>

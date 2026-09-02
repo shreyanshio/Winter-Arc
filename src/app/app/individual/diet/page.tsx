@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/lib/auth-context';
 import { getLocalTodayDateString } from '@/lib/date-utils';
 import { DietLog } from '@/lib/types';
+import { syncDietLog } from '@/lib/supabase-sync';
 import {
   Utensils,
   Sparkles,
@@ -92,6 +93,10 @@ export default function DietTrackerPage() {
         localStorage.setItem(storageKey, JSON.stringify(updated));
         return updated;
       });
+
+      if (profile?.id) {
+        syncDietLog(newLog, profile.id);
+      }
       setItemsText('');
     } catch (err) {
       console.error('Failed to parse nutrition:', err);

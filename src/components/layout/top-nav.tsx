@@ -82,7 +82,7 @@ export function TopNav() {
           {profile ? (
             <>
               <div className="flex items-center gap-2">
-                <AvatarBadge name={profile.display_name} size="sm" />
+                <AvatarBadge name={profile.display_name} avatarUrl={profile.avatar_url} size="sm" />
                 <span className="text-xs font-semibold text-gray-200 hidden sm:inline max-w-[110px] truncate font-mono">
                   {profile.display_name}
                 </span>

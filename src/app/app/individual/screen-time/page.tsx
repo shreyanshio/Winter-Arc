@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/lib/auth-context';
 import { getLocalTodayDateString } from '@/lib/date-utils';
 import { ScreenTimeLog } from '@/lib/types';
+import { syncScreenTimeLog } from '@/lib/supabase-sync';
 import {
   Smartphone,
   UploadCloud,
@@ -79,6 +80,10 @@ export default function ScreenTimeTrackerPage() {
         localStorage.setItem(storageKey, JSON.stringify(updated));
         return updated;
       });
+
+      if (profile?.id) {
+        syncScreenTimeLog(newLog, profile.id);
+      }
       setIsSubmitting(false);
       alert('Screen time logged successfully!');
     }, 400);

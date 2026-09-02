@@ -148,7 +148,7 @@ export default function MemberSpectatorPage() {
             {/* Profile Card Header */}
             <Card className="p-6 mb-8 border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-[#0e120d]/90 backdrop-blur-xl">
               <div className="flex items-center gap-4">
-                <AvatarBadge name={member.displayName} size="lg" />
+                <AvatarBadge name={member.displayName} avatarUrl={member.avatarUrl} size="lg" />
                 <div>
                   <div className="flex items-center gap-2">
                     <h1 className="font-display text-2xl sm:text-3xl text-white uppercase tracking-wide">

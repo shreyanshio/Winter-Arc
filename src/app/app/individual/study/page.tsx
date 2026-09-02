@@ -10,6 +10,7 @@ import { useAuth } from '@/lib/auth-context';
 import { useUIStore } from '@/lib/store';
 import { getLocalTodayDateString } from '@/lib/date-utils';
 import { StudySubject, StudySession } from '@/lib/types';
+import { syncStudySession } from '@/lib/supabase-sync';
 import {
   GraduationCap,
   Play,
@@ -158,6 +159,10 @@ export default function StudyChamberPage() {
       localStorage.setItem(storageKey, JSON.stringify(updated));
       return updated;
     });
+
+    if (profile?.id) {
+      syncStudySession(newSession, profile.id);
+    }
     setActiveStudy(null, null);
     setCurrentTaskNote('');
   };

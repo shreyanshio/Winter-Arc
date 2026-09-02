@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/lib/auth-context';
 import { getLocalTodayDateString, isTaskPastMidnight } from '@/lib/date-utils';
 import { DailyTask } from '@/lib/types';
+import { syncDailyTask } from '@/lib/supabase-sync';
 import {
   CheckSquare,
   Square,
@@ -101,6 +102,10 @@ export default function DailyTasksPage() {
       localStorage.setItem(storageKey, JSON.stringify(updated));
       return updated;
     });
+
+    if (profile?.id) {
+      syncDailyTask({ ...task, is_complete: nextState }, profile.id);
+    }
   };
 
   const handleAddTask = (e: React.FormEvent) => {
@@ -122,6 +127,10 @@ export default function DailyTasksPage() {
       localStorage.setItem(storageKey, JSON.stringify(updated));
       return updated;
     });
+
+    if (profile?.id) {
+      syncDailyTask(newTask, profile.id);
+    }
     setNewTaskText('');
   };
 

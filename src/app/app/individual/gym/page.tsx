@@ -14,6 +14,7 @@ import {
   parseWorkoutInput,
   ExerciseCatalogItem,
 } from '@/lib/workout-math';
+import { syncWorkoutSet } from '@/lib/supabase-sync';
 import { connectHeartRateMonitor } from '@/lib/bluetooth';
 import {
   Dumbbell,
@@ -159,6 +160,10 @@ export default function GymWorkoutPage() {
       localStorage.setItem(`wa_gym_${userId}`, JSON.stringify(updated));
       return updated;
     });
+
+    if (profile?.id) {
+      syncWorkoutSet(newSet, profile.id);
+    }
     setWorkoutInput('');
   };
 

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface AvatarBadgeProps {
   name: string;
+  avatarUrl?: string | null;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
 }
@@ -15,7 +16,27 @@ const GRADIENTS = [
   'from-teal-400 to-cyan-600',
 ];
 
-export function AvatarBadge({ name, className = '', size = 'md' }: AvatarBadgeProps) {
+export function AvatarBadge({ name, avatarUrl, className = '', size = 'md' }: AvatarBadgeProps) {
+  const [imageFailed, setImageFailed] = useState(false);
+
+  const sizeClasses = {
+    sm: 'w-7 h-7 text-[10px]',
+    md: 'w-10 h-10 text-xs',
+    lg: 'w-14 h-14 text-base font-bold',
+  };
+
+  // If user has a real Google profile picture and it hasn't errored
+  if (avatarUrl && !imageFailed) {
+    return (
+      <img
+        src={avatarUrl}
+        alt={name}
+        onError={() => setImageFailed(true)}
+        className={`rounded-full object-cover border border-white/20 shadow-sm shrink-0 select-none ${sizeClasses[size]} ${className}`}
+      />
+    );
+  }
+
   const initials = name
     .split(/[\s_]+/)
     .map((w) => w[0])
@@ -25,12 +46,6 @@ export function AvatarBadge({ name, className = '', size = 'md' }: AvatarBadgePr
 
   const charCode = (name.charCodeAt(0) || 0) + (name.charCodeAt(1) || 0);
   const gradient = GRADIENTS[charCode % GRADIENTS.length];
-
-  const sizeClasses = {
-    sm: 'w-7 h-7 text-[10px]',
-    md: 'w-10 h-10 text-xs',
-    lg: 'w-14 h-14 text-base font-bold',
-  };
 
   return (
     <div
