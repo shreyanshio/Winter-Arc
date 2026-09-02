@@ -29,6 +29,15 @@ export default function IndividualCockpitPage() {
   const router = useRouter();
   const { profile, commitments, isOnboarded, isLoading } = useAuth();
 
+  // Mandatory Onboarding Guard: Must have at least 5 commitments
+  useEffect(() => {
+    if (!isLoading && profile) {
+      if (!isOnboarded) {
+        router.push('/onboarding');
+      }
+    }
+  }, [profile, isOnboarded, isLoading, router]);
+
   const currentDay = calculateChallengeDay(profile?.challenge_started_at, profile?.timezone);
   const todayStr = getLocalTodayDateString(profile?.timezone);
 

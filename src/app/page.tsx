@@ -26,17 +26,21 @@ import {
 
 export default function LandingPage() {
   const router = useRouter();
-  const { user, loginWithGoogle } = useAuth();
+  const { user, loginWithGoogle, isOnboarded, isLoading: authLoading } = useAuth();
 
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // If user is already logged in, redirect directly to Cockpit
+  // If user is already logged in, enforce onboarding check
   React.useEffect(() => {
-    if (user) {
-      router.push('/app/individual');
+    if (user && !authLoading) {
+      if (!isOnboarded) {
+        router.push('/onboarding');
+      } else {
+        router.push('/app/individual');
+      }
     }
-  }, [user, router]);
+  }, [user, isOnboarded, authLoading, router]);
 
   const handleGoogleLogin = async () => {
     setErrorMsg(null);
