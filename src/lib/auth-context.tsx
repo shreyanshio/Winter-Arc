@@ -278,10 +278,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    const redirectUrl =
+      typeof window !== 'undefined' && window.location.origin
+        ? `${window.location.origin}/app/individual`
+        : 'https://winterarc-phi.vercel.app/app/individual';
+
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/app/individual`,
+        redirectTo: redirectUrl,
       },
     });
   };
