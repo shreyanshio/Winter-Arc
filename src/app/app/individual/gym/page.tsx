@@ -111,17 +111,25 @@ export default function GymWorkoutPage() {
     }
   };
 
-  const handleSyncSteps = () => {
-    setIsSyncingSteps(true);
-    setTimeout(() => {
-      setStepCount((prev) => {
-        const nextSteps = prev + 1000;
-        const userId = profile?.id || 'active';
-        localStorage.setItem(`wa_steps_${userId}`, nextSteps.toString());
-        return nextSteps;
-      });
-      setIsSyncingSteps(false);
-    }, 700);
+  const [isEditingSteps, setIsEditingSteps] = useState(false);
+  const [stepInputValue, setStepInputValue] = useState('');
+  const [isLoggingPulse, setIsLoggingPulse] = useState(false);
+  const [pulseInputValue, setPulseInputValue] = useState('');
+
+  const handleSaveSteps = (count: number) => {
+    const valid = Math.max(0, count);
+    setStepCount(valid);
+    const userId = profile?.id || 'active';
+    localStorage.setItem(`wa_steps_${userId}`, valid.toString());
+    setIsEditingSteps(false);
+  };
+
+  const handleManualPulse = (rate: number) => {
+    if (rate >= 35 && rate <= 240) {
+      setBpm(rate);
+      setBpmSamples((prev) => [...prev, rate]);
+      setIsLoggingPulse(false);
+    }
   };
 
   const filteredExercises = EXERCISE_CATALOG.filter((ex) => {
@@ -168,12 +176,12 @@ export default function GymWorkoutPage() {
   };
 
   const totalWorkoutCalories = loggedSets.reduce((sum, s) => sum + s.estimatedCalories, 0);
-  const minBpm = bpmSamples.length > 0 ? Math.min(...bpmSamples) : 72;
-  const maxBpm = bpmSamples.length > 0 ? Math.max(...bpmSamples) : 158;
+  const minBpm = bpmSamples.length > 0 ? Math.min(...bpmSamples) : null;
+  const maxBpm = bpmSamples.length > 0 ? Math.max(...bpmSamples) : null;
   const avgBpm =
     bpmSamples.length > 0
       ? Math.round(bpmSamples.reduce((a, b) => a + b, 0) / bpmSamples.length)
-      : 124;
+      : null;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -182,61 +190,152 @@ export default function GymWorkoutPage() {
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-8">
         {/* Pinned Top Bar: Step Counter & Smartwatch Live Heart Rate */}
         <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* Steps */}
-          <Card className="p-4 border-white/[0.08] flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                <Footprints className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-[11px] text-gray-400 uppercase font-mono tracking-wider">
-                  Daily Step Counter ({todayStr})
-                </span>
-                <div className="text-2xl font-bold text-white font-mono">
-                  {stepCount.toLocaleString()} steps
+          {/* Steps Card */}
+          <Card className="p-4 border-white/[0.08] flex flex-col justify-between gap-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                  <Footprints className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[11px] text-gray-400 uppercase font-mono tracking-wider">
+                    Daily Step Counter ({todayStr})
+                  </span>
+                  <div className="text-2xl font-bold text-white font-mono">
+                    {stepCount.toLocaleString()} <span className="text-xs text-gray-500 font-normal">/ 10,000 steps</span>
+                  </div>
                 </div>
               </div>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setIsEditingSteps(!isEditingSteps);
+                  setStepInputValue(stepCount.toString());
+                }}
+                className="text-xs font-mono"
+              >
+                {isEditingSteps ? 'Close' : 'Log Steps'}
+              </Button>
             </div>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleSyncSteps}
-              isLoading={isSyncingSteps}
-              className="text-xs"
-            >
-              Sync Steps
-            </Button>
+            {/* Interactive Step Input Bar */}
+            {isEditingSteps && (
+              <div className="pt-2 border-t border-white/[0.06] flex flex-wrap items-center gap-2">
+                <Input
+                  type="number"
+                  placeholder="Enter exact steps..."
+                  value={stepInputValue}
+                  onChange={(e) => setStepInputValue(e.target.value)}
+                  className="h-8 text-xs font-mono w-32"
+                />
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => handleSaveSteps(parseInt(stepInputValue, 10) || 0)}
+                  className="h-8 text-xs font-mono bg-amber-400 text-black hover:bg-amber-300"
+                >
+                  Save
+                </Button>
+                <div className="flex items-center gap-1">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => handleSaveSteps(stepCount + 500)}
+                    className="h-8 text-[11px] font-mono px-2"
+                  >
+                    +500
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => handleSaveSteps(stepCount + 1000)}
+                    className="h-8 text-[11px] font-mono px-2"
+                  >
+                    +1K
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleSaveSteps(0)}
+                    className="h-8 text-[11px] font-mono text-rose-400 hover:text-rose-300 px-2"
+                  >
+                    Reset
+                  </Button>
+                </div>
+              </div>
+            )}
           </Card>
 
-          {/* Heart Rate */}
-          <Card className="p-4 border-white/[0.08] flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
-                <Heart className={`w-5 h-5 ${bpm ? 'animate-bounce' : ''}`} />
-              </div>
-              <div>
-                <span className="text-[11px] text-gray-400 uppercase font-mono tracking-wider">
-                  Live Heart Rate (BLE GATT)
-                </span>
-                <div className="text-2xl font-bold text-white font-mono flex items-baseline gap-2">
-                  <span>{bpm ? `${bpm} BPM` : '124 BPM'}</span>
-                  <span className="text-xs font-normal text-gray-400 font-mono">
-                    (Min {minBpm} / Max {maxBpm} / Avg {avgBpm})
-                  </span>
+          {/* Heart Rate (BPM) Card */}
+          <Card className="p-4 border-white/[0.08] flex flex-col justify-between gap-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                  <Heart className={`w-5 h-5 ${bpm ? 'animate-bounce text-rose-500' : ''}`} />
                 </div>
+                <div>
+                  <span className="text-[11px] text-gray-400 uppercase font-mono tracking-wider">
+                    Live Heart Rate {bleDevice ? `(${bleDevice})` : '(Sensor / Manual)'}
+                  </span>
+                  <div className="text-2xl font-bold text-white font-mono flex items-baseline gap-2">
+                    <span>{bpm ? `${bpm} BPM` : '-- BPM'}</span>
+                    {minBpm !== null ? (
+                      <span className="text-xs font-normal text-gray-400 font-mono">
+                        (Min {minBpm} / Max {maxBpm} / Avg {avgBpm})
+                      </span>
+                    ) : (
+                      <span className="text-xs font-normal text-gray-500 font-mono">
+                        No active sensor
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={handlePairBle}
+                  className="text-xs gap-1 font-mono"
+                >
+                  <Bluetooth className="w-3.5 h-3.5 text-primary" />
+                  <span>{bleDevice ? 'BLE Active' : 'Pair BLE'}</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsLoggingPulse(!isLoggingPulse)}
+                  className="text-xs font-mono"
+                >
+                  {isLoggingPulse ? 'Close' : 'Log BPM'}
+                </Button>
               </div>
             </div>
 
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handlePairBle}
-              className="text-xs gap-1"
-            >
-              <Bluetooth className="w-3.5 h-3.5 text-primary" />
-              <span>{bleDevice ? 'BLE Active' : 'Pair BLE'}</span>
-            </Button>
+            {/* Manual Pulse Input Bar */}
+            {isLoggingPulse && (
+              <div className="pt-2 border-t border-white/[0.06] flex items-center gap-2">
+                <Input
+                  type="number"
+                  placeholder="e.g. 74 or 145"
+                  value={pulseInputValue}
+                  onChange={(e) => setPulseInputValue(e.target.value)}
+                  className="h-8 text-xs font-mono w-32"
+                />
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() => handleManualPulse(parseInt(pulseInputValue, 10) || 0)}
+                  className="h-8 text-xs font-mono bg-rose-500 text-white hover:bg-rose-600"
+                >
+                  Save Pulse
+                </Button>
+                <span className="text-[11px] text-gray-500 font-mono">Enter measured pulse</span>
+              </div>
+            )}
           </Card>
         </div>
 

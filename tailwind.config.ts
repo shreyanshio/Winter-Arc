@@ -37,9 +37,9 @@ const config: Config = {
         }
       },
       fontFamily: {
-        display: ["Anton", "sans-serif"],
-        sans: ["'Plus Jakarta Sans'", "sans-serif"],
-        mono: ["'JetBrains Mono'", "monospace"],
+        display: ['var(--font-display)', 'Anton', 'Impact', 'sans-serif'],
+        sans: ['var(--font-sans)', "'Plus Jakarta Sans'", 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', "'JetBrains Mono'", 'monospace'],
       },
       backdropBlur: {
         xs: "2px",

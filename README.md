@@ -1,445 +1,177 @@
-<div align="center">
+# ❄️ WINTER ARC CHALLENGE
+### *Engineered for Supreme Discipline • The 90-Day Crucible*
 
-# ❄️ EXCLUSIVE WINTER ARC CHALLENGE
-
-### *The Ultimate Self-Mastery, Habit Execution & Public Accountability Platform*
-
-[![Next.js](https://img.shields.io/badge/Frontend-Next.js%2014%20%2F%20React-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Backend-Supabase%20Realtime-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
-[![Google Gemini](https://img.shields.io/badge/AI%20Engine-Gemini%20Flash-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev/)
-[![Google Fit](https://img.shields.io/badge/Hardware-Google%20Fit%20%26%20Bluetooth-EA4335?style=for-the-badge&logo=google)](https://developers.google.com/fit)
-
-<p align="center">
-  <b>Uncompromising discipline. Real-time community accountability. Zero excuses.</b><br>
-  Built for athletes, competitive scholars, and relentless builders entering their Winter Arc.
-</p>
-
-[Features](#-key-features) • [Architecture](#-system-architecture) • [Database Schema](#-database-schema) • [Quickstart](#-getting-started) • [API Integrations](#-api--hardware-integrations) • [Environment Setup](#-environment-variables)
-
-</div>
+[![Live Deployment](https://img.shields.io/badge/Live%20Deployment-winterarc--phi.vercel.app-00FF66?style=for-the-badge&logo=vercel&logoColor=black)](https://winterarc-phi.vercel.app/)
+[![Database](https://img.shields.io/badge/Cloud%20Database-Supabase%20PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![AI Engine](https://img.shields.io/badge/Vision%20%26%20Nutrition-Google%20Gemini%202.5%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Hardware Sync](https://img.shields.io/badge/Smartwatch%20Sync-Web%20Bluetooth%20GATT-0082FC?style=for-the-badge&logo=bluetooth&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API)
+[![Auth Protocol](https://img.shields.io/badge/Compulsory%20Auth-Google%20OAuth%202.0-EA4335?style=for-the-badge&logo=google&logoColor=white)](https://cloud.google.com/)
 
 ---
 
-## 📌 Project Overview
+## 🏛️ The Winter Arc Creed
 
-The **Exclusive Winter Arc Challenge** is an aesthetic, high-performance web platform designed to enforce peak mental, physical, and academic discipline over the Winter Arc period (typically 90 days from October to January).
+> *"Winter is not a season of retreat. It is an arena of voluntary hardship, uncompromising focus, and absolute self-mastery."*
 
-Unlike conventional habit trackers that offer passive reminders and private excuses, this platform treats personal growth as an open-arena sport:
-1. **Public Accountability & Spectator Mode:** Every participant's progress, commitments, and daily logs are visible in real-time to other members with **sub-3-second synchronization**.
-2. **Strict Gatekeeping:** Users must commit to between **5 and 20 non-negotiable rules/tasks** before gaining access to the challenge dashboard.
-3. **Hard Midnight Cutoffs (12:00 AM):** Unfinished daily tasks and unlogged metrics lock at midnight—preserving historical truth and eliminating procrastination.
-4. **AI-Powered Nutrition Analysis:** Powered by **Google Gemini Flash**, users type their meals naturally (e.g., *"3 boiled eggs, 2 slices whole wheat toast, and black coffee"*) and receive instantaneous calorie and macronutrient surplus/deficit metrics.
-5. **Hardware & Sensor Sync:** Integrates with the **Web Bluetooth API** and **Google Fit REST API** for automatic step counts, smartwatch heart rate capture (min/avg/max), and sleep tracking.
+The **Winter Arc Challenge** is a production-grade social accountability platform engineered for individuals who refuse mediocrity. Over a grueling 90-day window, challengers surrender comfort to build physical dominance, intellectual mastery, and relentless mental fortitude.
+
+Unlike casual habit trackers filled with gamified fluff, Winter Arc is designed with **zero-compromise integrity**:
+- **Zero Mock Data**: No fake AI entries, no fabricated streaks. Every metric represents real human discipline.
+- **Strict Midnight Locks**: Tasks uncompleted before local midnight are permanently locked as failures.
+- **Compulsory Public Accountability**: Every rule and progress metric is audited by your peers in real-time.
 
 ---
 
-## 🎯 Core User Journey
+## 🌐 Live Access
 
-```mermaid
-flowchart TD
-    A[User Arrives] --> B{Authenticated?}
-    B -->|No| C[Login via Google OAuth or Telegram]
-    B -->|Yes| D{Commitments Configured?}
-    C --> D
-    D -->|No: < 5 Tasks| E[Commitment Gateway: Enter 5 to 20 Tasks with Custom Badges]
-    E --> D
-    D -->|Yes: >= 5 Tasks| F[Enter Winter Arc Dashboard]
-    F --> G[Navigation Hub]
-    G --> H[Individual Hub: Sleep, Screen Time, Diet, Study, Gym, Tasks]
-    G --> I[Members Arena: Realtime Spectator Mode]
-    G --> J[Records & Analytics: Activity Drilldown & Historic Graphs]
+- **Official Web Application**: [https://winterarc-phi.vercel.app/](https://winterarc-phi.vercel.app/)
+- **Target Audience**: Dedicated challengers, workout partners, study groups, and high-performance teams.
+- **Client Architecture**: Mobile-first Responsive PWA with spatial dock navigation and tactical dark aesthetics.
+
+---
+
+## ⚔️ The 6 Core Discipline Pillars
+
+Winter Arc unifies the 6 non-negotiable pillars of personal transformation into a cohesive tactical dashboard:
+
+```
+                          ┌────────────────────────┐
+                          │   WINTER ARC ARENA     │
+                          └───────────┬────────────┘
+                                      │
+         ┌──────────────┬─────────────┼─────────────┬──────────────┐
+         ▼              ▼             ▼             ▼              ▼
+   ┌───────────┐  ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐
+   │  TASKS    │  │   SLEEP   │ │SCREEN TIME│ │   DIET    │ │   STUDY   │
+   │ Midnight  │  │ Circadian │ │ Anti-Doom │ │ Gemini AI │ │ Pomodoro  │
+   │   Lock    │  │  BLE BPM  │ │  Firewall │ │  Nutrition│ │  Chamber  │
+   └───────────┘  └───────────┘ └───────────┘ └───────────┘ └───────────┘
+                                      │
+                                      ▼
+                               ┌─────────────┐
+                               │     GYM     │
+                               │ Heavy Sets  │
+                               │ Real Steps  │
+                               └─────────────┘
 ```
 
 ---
 
-## ✨ Key Features
-
-### 1. 🔐 Multi-Provider Authentication
-- **Google OAuth 2.0:** Secure single-click sign-in handled through Supabase Auth.
-- **Telegram Login Widget:** High-speed authentication for community-first members via Telegram Bot API.
-
-### 2. 🛡️ The Commitment Gateway
-- New users must define their foundational commitments upon first login.
-- Minimum **5 commitments**, maximum **20 commitments**.
-- Each commitment receives a distinctive identifying bullet/badge.
-- The challenge dashboard unlocks **only after** meeting the threshold.
-- Automatic day tracking (e.g., `Day 1`, `Day 14`, `Day 90`) with smart morning check-in detection if accessed before 12:00 PM.
+### 1. 🛡️ Daily Discipline Tasks (Strict Midnight Lock)
+- **Non-Negotiable Execution**: Create up to 20 tactical daily missions every morning.
+- **The Midnight Lockout Engine**: Each day's tasks are tied to your local timezone. At precisely `00:00:00` local time, tasks automatically lock.
+- **No Retroactive Forgiveness**: You cannot edit or complete yesterday's tasks. Incomplete missions stand as permanent reminders in your historical ledger.
+- **Confetti Victory Cue**: Hitting complete on daily missions triggers tactical celebration feedback.
 
 ---
 
-### 3. 👤 Pillar I: Individual Dashboard (Hamburger Drawer Navigation)
-
-#### 🛌 A. Wakeup & Sleep Time Management
-- **Interactive Sleep Clock:** Tap `Sleep` to trigger a live timer accompanied by a motivational *"Goodnight"* interface.
-- **Wakeup Lock:** Tapping `Wake Up` logs sleep duration and calculates circadian efficiency.
-- **Discipline Grace Period:** Allows one-time manual adjustments (e.g., if woke up at 06:10 instead of 06:00), after which the record permanently locks.
-- **Smartwatch Bluetooth Sync:** Connects via Web Bluetooth API to read sleep stages and sleep duration directly from paired wearables.
-
-#### 📱 B. Daily Screen Time Record
-- **Manual Input with Proof:** Enter hours and minutes with screenshot proof uploads stored in Supabase Storage.
-- **Device Usage API Integration:** Direct reading of screen-time metrics via native device integrations and Web APIs where supported.
-
-#### 🥗 C. AI Health & Diet Engine (Google Gemini Flash)
-- **4 Meal Segments:** `Breakfast`, `Lunch`, `Snacks`, `Dinner`.
-- **Instant Natural Language Analysis:** Converts unstructured text into precise nutritional breakdowns:
-  - Calories consumed per meal
-  - Cumulative daily calorie intake
-  - Calorie surplus or deficit relative to the user's Basal Metabolic Rate (BMR) / TDEE target
-- Real-time response speed (< 1 second) using Google Gemini Flash.
-
-#### 📚 D. The Study Chamber
-- **Stream Categorization:**
-  - `Science`
-  - `Commerce`
-  - `Arts`
-  - Specialized tracks: `JEE (Main + Advanced)`, `NEET`, and custom exam preparations.
-- **Dynamic Subject Management:** Add, customize, rename, or delete subjects tailored to individual curricula.
-- **Dual-Timer System:**
-  - **Subject Timer:** Independent timer dedicated to the currently active subject session.
-  - **Global Top-Bar Timer:** Automatically aggregates cumulative study hours across all subjects during the day.
-- **Focus Features:** Built-in Pomodoro cycles (25/5 or 50/10) with focus alarms and task lists per subject.
-
-#### 🏋️ E. Gym & Home Workout Arena
-- **Mode Toggle:** Switch between `Gym Workout` and `Home Calisthenics`.
-- **Live Biometrics:** Smartwatch heart-rate monitoring displaying **Min BPM**, **Max BPM**, and **Average BPM**.
-- **Pedometer & Step Tracker:** Sticky top-bar step counter with automatic background sync via **Google Fit API** or manual entry.
-- **Exhaustive Gym Exercise Catalog:**
-
-| Muscle Group | Supported Exercises & Sub-Workouts |
-| :--- | :--- |
-| **Abs** | Ab-Wheel Rollout, Cable Crunch, Crunch, Crunch Machine, Decline Crunch, Dragon Flag, Hanging Knee Raise, Hanging Leg Raise, Plank, Side Plank |
-| **Back** | Barbell Row, Barbell Shrug, Chin Up, Deadlift, Dumbbell Row, Good Morning, Hammer Strength Row, Lat Pulldown, Machine Shrug, Neutral Chin Up, Pendlay Row, Pull Up, Rack Pull, Seated Cable Row, Straight-Arm Cable Pushdown, T-Bar Row |
-| **Biceps** | Barbell Curl, Cable Curl, Dumbbell Concentration Curl, Dumbbell Curl, Dumbbell Hammer Curl, Dumbbell Preacher Curl, EZ-Bar Curl, EZ-Bar Preacher Curl, Seated Incline Dumbbell Curl, Seated Machine Curl |
-| **Cardio** | Cycling, Elliptical Trainer, Rowing Machine, Running (Outdoor), Running (Treadmill), Stationary Bike, Swimming, Walking |
-| **Chest** | Cable Crossover, Decline Barbell Bench Press, Decline Hammer Strength Chest Press, Flat Barbell Bench Press, Flat Dumbbell Bench Press, Flat Dumbbell Fly, Incline Barbell Bench Press, Incline Dumbbell Bench Press, Incline Dumbbell Fly, Incline Hammer Strength Chest Press, Seated Machine Fly |
-| **Legs** | Barbell Calf Raise, Barbell Front Squat, Barbell Glute Bridge, Barbell Squat, Donkey Calf Raise, Glute-Ham Raise, Leg Extension Machine, Leg Press, Lying Leg Curl Machine, Romanian Deadlift, Seated Calf Raise Machine, Seated Leg Curl Machine, Standing Calf Raise Machine, Stiff-Legged Deadlift, Sumo Deadlift |
-| **Shoulders** | Arnold Dumbbell Press, Behind The Neck Barbell Press, Cable Face Pull, Front Dumbbell Raise, Hammer Strength Shoulder Press, Lateral Dumbbell Raise, Lateral Machine Raise, Log Press, One-Arm Standing Dumbbell Press, Overhead Press, Push Press, Rear Delt Dumbbell Raise, Rear Delt Machine Fly, Seated Dumbbell Lateral Raise, Seated Dumbbell Press, Smith Machine Overhead Press |
-| **Triceps** | Cable Overhead Triceps Extension, Close Grip Barbell Bench Press, Dumbbell Overhead Triceps Extension, EZ-Bar Skullcrusher, Lying Triceps Extension, Parallel Bar Triceps Dip, Ring Dip, Rope Push Down, Smith Machine Close Grip Bench Press, V-Bar Push Down |
-| **Home Workout**| Calisthenics, Push-ups, Bodyweight Squats, Burpees, Lunges, Dips, Pike Push-ups, Doorframe Pull-ups, Resistance Bands |
-
-- **Workout Logging:** Log sets and reps (e.g. `4 sets x 10 reps @ 80kg`); dynamic metabolic equivalent (MET) algorithms estimate precise calories burned per exercise.
-
-#### ⏱️ F. Strict Daily Tasks Checklist
-- Add daily objectives linked to your primary commitments.
-- **The 12:00 AM Midnight Lock:** Any task not checked off before midnight is permanently locked as `Incomplete`. No retroactive editing is permitted.
+### 2. 🌙 Sleep & Circadian Engine
+- **Sleep Session Timer**: One-tap sleep engagement that tracks elapsed rest to the second.
+- **Web Bluetooth Smartwatch Pairing**: Connects directly to BLE heart rate monitors (Apple Watch BLE broadcasters, Polar chest straps, Garmin, Xiaomi bands) using the standard Bluetooth SIG Heart Rate Service (UUID `0x180D`).
+- **Circadian Wake Attribution**: Sleep sessions are mathematically attributed to the day of waking, ensuring nocturnal shifts accurately reflect morning readiness.
+- **Edit Audit Log**: Any manual adjustment to wake-up time is permanently flagged with an `[Edited]` badge for transparency.
 
 ---
 
-### 4. 👥 Pillar II: Members Arena (Spectator Mode)
-- Real-time directory of all active Winter Arc participants.
-- **Spectator Mode:** Click on any member to inspect their profile:
-  - View their initial 5–20 commitments
-  - Inspect their daily task completion rate
-  - View their current workout volume, study hours, and diet logs
-  - **Read-Only Security:** Zero editing or tampering permissions for spectators.
+### 3. 📱 Screen Time Firewall & Anti-Doomscroll Proof
+- **Digital Minimalism**: Track phone usage down to the exact minute against daily thresholds.
+- **Screenshot Verification**: Upload screenshot proof of your device's Digital Wellbeing or Screen Time dashboard.
+- **Verification Badging**: Logs verified with image proof receive high-status verification marks in the spectator directory.
+- **Visual Limit Barometers**: Color-shifting gauges alert you when approaching or exceeding your daily allotted screen allowance.
 
 ---
 
-### 5. 📊 Pillar III: Records & Deep Analytics
-- Dedicated historical section partitioned to prevent data pollution between disciplines.
-- **Interactive Drilldown:** Click any activity (e.g., *Deadlift*, *Physics Studies*, *Screen Time*, *Caloric Deficit*) to reveal:
-  - Chronological activity ledger
-  - Interactive charts & trendlines across custom date ranges
-  - Personal records (PRs), volume progression, and consistency streaks
+### 4. 🥩 Diet & Nutrition AI Macro Engine (Google Gemini 2.5 Flash)
+- **Natural Language Parsing**: Type food naturally like an athlete — *"3 boiled eggs, 2 rotis with dal, 1 scoop whey protein, and 1 banana"*.
+- **Instant Macro Breakdown**: Google's Gemini 2.5 Flash model computes estimated total calories, grams of protein, carbohydrates, and healthy fats within milliseconds.
+- **Triple-Key Failover System**: Backend rotation across three independent Gemini API keys ensures zero downtime or quota limits even during peak team usage.
+- **Athlete Override Control**: Manually override caloric estimates whenever exact kitchen scale measurements are available.
 
 ---
 
-## 🏗️ System Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           CLIENT BROWSER                                │
-│  ┌───────────────────────────────────────────────────────────────────┐  │
-│  │   Next.js 14 App Router + Tailwind CSS + Framer Motion            │  │
-│  │   - Individual Dashboard (Drawer)                                 │  │
-│  │   - Members Spectator Mode                                        │  │
-│  │   - Records & Visual Analytics (Recharts)                         │  │
-│  └──────────────────┬─────────────────────────────┬──────────────────┘  │
-│                     │                             │                     │
-│          Web Bluetooth API              Supabase Client SDK             │
-│        (Smartwatch HR & Sleep)          (Sub-3s Realtime Sync)          │
-└─────────────────────┼─────────────────────────────┼─────────────────────┘
-                      │                             │
-                      ▼                             ▼
-┌───────────────────────────┐         ┌───────────────────────────────────┐
-│     EXTERNAL DEVICES      │         │             SUPABASE              │
-│  - Bluetooth Smartwatch   │         │  - PostgreSQL + Row-Level Security│
-│  - Fitness Wearables      │         │  - Supabase Realtime Channels     │
-└───────────────────────────┘         │  - Supabase Auth (Google/OAuth)   │
-                                      │  - Supabase Storage (Proof Upload)│
-                                      └─────────────────┬─────────────────┘
-                                                        │
-                      ┌─────────────────────────────────┴─────────────────┐
-                      │                                                   │
-                      ▼                                                   ▼
-┌───────────────────────────┐                           ┌───────────────────────────────────┐
-│     GOOGLE GEMINI AI      │                           │      EXTERNAL API SERVICES        │
-│  - Gemini 2.5 Flash       │                           │  - Google Fit API (Step Sync)     │
-│  - Sub-1s Nutrition Parse │                           │  - Telegram Login Bot API         │
-└───────────────────────────┘                           └───────────────────────────────────┘
-```
+### 5. 📚 Deep Work & Pomodoro Study Chamber
+- **Dual Study Modes**:
+  - *Pomodoro Technique*: Built-in 25-minute focus intervals accompanied by mandatory 5-minute cognitive resets.
+  - *Freeform Flow*: Uninterrupted deep work stopwatch for marathon intellectual sessions.
+- **Academic Subject Management**: Categorize study hours by specific courses, engineering topics, or professional skills.
+- **Task Notes Ledger**: Document exact topics mastered during every session for retrospective review.
 
 ---
 
-## 🗄️ Database Schema
-
-The platform relies on Supabase (PostgreSQL) with strict **Row Level Security (RLS)** ensuring users can write only to their own rows, while allowing public read access for **Members Spectator Mode**.
-
-```sql
--- 1. PROFILES & USER STATS
-CREATE TABLE profiles (
-  id UUID REFERENCES auth.users(id) PRIMARY KEY,
-  full_name TEXT NOT NULL,
-  username TEXT UNIQUE NOT NULL,
-  avatar_url TEXT,
-  provider TEXT CHECK (provider IN ('google', 'telegram')),
-  challenge_day INT DEFAULT 1,
-  has_onboarded BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- 2. COMMITMENT GATEWAY (5 to 20 commitments per user)
-CREATE TABLE commitments (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  title TEXT NOT NULL,
-  bullet_icon TEXT NOT NULL, -- Distinct bullet/icon identifier
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- 3. SLEEP LOGS
-CREATE TABLE sleep_records (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
-  sleep_time TIMESTAMPTZ,
-  wake_time TIMESTAMPTZ,
-  duration_minutes INT,
-  is_locked BOOLEAN DEFAULT FALSE,
-  source TEXT DEFAULT 'manual' CHECK (source IN ('manual', 'bluetooth')),
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- 4. SCREEN TIME RECORDS
-CREATE TABLE screen_time_records (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
-  total_minutes INT NOT NULL,
-  proof_image_url TEXT,
-  source TEXT DEFAULT 'manual' CHECK (source IN ('manual', 'api')),
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- 5. NUTRITION & DIET LOGS (GEMINI AI)
-CREATE TABLE diet_logs (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
-  meal_type TEXT CHECK (meal_type IN ('breakfast', 'lunch', 'snacks', 'dinner')),
-  raw_input TEXT NOT NULL,
-  parsed_items JSONB,
-  calories INT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- 6. STUDY SESSIONS
-CREATE TABLE study_sessions (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  stream TEXT NOT NULL, -- Science, Commerce, Arts, JEE, NEET, etc.
-  subject_name TEXT NOT NULL,
-  duration_seconds INT NOT NULL,
-  date DATE NOT NULL,
-  notes TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- 7. WORKOUT & GYM RECORDS
-CREATE TABLE workout_logs (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  workout_type TEXT CHECK (workout_type IN ('gym', 'home')),
-  muscle_group TEXT NOT NULL, -- Abs, Back, Chest, Legs, etc.
-  exercise_name TEXT NOT NULL,
-  sets INT NOT NULL,
-  reps INT NOT NULL,
-  weight_kg NUMERIC(5,2),
-  calories_burned INT,
-  heart_rate_avg INT,
-  date DATE NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- 8. DAILY TASKS (WITH 12:00 AM LOCK)
-CREATE TABLE daily_tasks (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
-  task_name TEXT NOT NULL,
-  is_completed BOOLEAN DEFAULT FALSE,
-  is_locked BOOLEAN DEFAULT FALSE,
-  completed_at TIMESTAMPTZ,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- 9. STEP TRACKER
-CREATE TABLE step_logs (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
-  step_count INT NOT NULL,
-  source TEXT DEFAULT 'manual' CHECK (source IN ('manual', 'google_fit')),
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-```
+### 6. 🏋️ Heavy Iron Workout & Pedometer Ledger
+- **Extensive Exercise Catalog**: 45+ movements organized across 7 muscle groups (Chest, Back, Legs, Shoulders, Arms, Core, Cardio) with Home vs. Gym equipment filters.
+- **Natural Language Set Logging**: Quick-input sets in natural gym shorthand like *"bench 80kg 4x10"* or *"deadlift 120kg 3x5"*.
+- **Accurate Caloric Expenditure**: Computes estimated caloric burn based on body weight, exercise MET coefficients, and completed volume.
+- **Authentic Step Counter**: Record exact daily steps manually or increment via quick-action chips. Zero fake auto-increments.
+- **Smartwatch Heart Rate Monitor**: Real-time pulse monitoring via Web Bluetooth GATT or quick manual pulse logging.
 
 ---
 
-## 🚀 Getting Started
+## 🔒 Compulsory Authentication & Social Integrity
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) `>= 18.18.0`
-- [npm](https://www.npmjs.com/) or [pnpm](https://pnpm.io/)
-- A free [Supabase](https://supabase.com/) project
-- A free [Google AI Studio](https://aistudio.google.com/) API Key for Gemini Flash
+### 1. Mandatory Google Account Sign-In
+To eliminate bot profiles and preserve spectator trust, Winter Arc requires official **Google OAuth 2.0 authentication**:
+- **Automatic Identity Sync**: Displays your verified Google account name and official profile photo across all leaderboards and challenge rooms.
+- **Instant Single-Click Access**: No passwords to memorize or lose. One click puts you directly into the arena.
 
-### Installation Steps
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/your-username/winter-arc.git
-   cd "Winter Arc"
-   ```
-
-2. **Install Dependencies:**
-   ```bash
-   npm install
-   # or
-   pnpm install
-   ```
-
-3. **Configure Environment Variables:**
-   Copy `.env.example` into your active `.env.local`:
-   ```bash
-   cp .env.example .env.local
-   ```
-   Fill in your Supabase credentials, Google OAuth keys, Gemini API key, and Telegram Bot details.
-
-4. **Initialize Supabase Schema:**
-   - Go to your **Supabase Dashboard** -> **SQL Editor**.
-   - Paste and run the schema from the [Database Schema](#-database-schema) section.
-   - Under **Authentication** -> **Providers**, enable **Google**.
-   - Under **Storage**, create a public bucket named `screentime-proofs`.
-
-5. **Start the Development Server:**
-   ```bash
-   npm run dev
-   # or
-   pnpm dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+### 2. The 5-Rule Mandatory Commitment Gate
+New challengers cannot enter the cockpit without passing through the **Commitment Gatekeeper**:
+- **Minimum 5 Sacred Pledges**: Challengers must pledge between 5 and 20 non-negotiable rules (e.g., *"Wake up at 5:00 AM"*, *"10,000 steps daily"*, *"Zero processed sugar"*).
+- **Cockpit Lockout**: The platform strictly prevents access to dashboards and logs until 5 rules are permanently pledged.
+- **Cloud Immutability**: Rules are stored directly in Supabase and displayed publicly under your profile.
 
 ---
 
-## 🔑 Environment Variables
+## 👥 Members Directory & Spectator Accountability
 
-The project requires the following environment variables configured in `.env.local` (see [`.env.example`](file:///.env.example)):
-
-| Variable Name | Required | Description |
-| :--- | :---: | :--- |
-| `NEXT_PUBLIC_APP_URL` | **Yes** | The canonical URL of the application (e.g., `http://localhost:3000`). |
-| `NEXT_PUBLIC_SUPABASE_URL` | **Yes** | Your Supabase project URL (`https://<project-id>.supabase.co`). |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | **Yes** | Public Supabase anon key with Row Level Security enforcement. |
-| `SUPABASE_SERVICE_ROLE_KEY` | **Yes** | Supabase admin key for secure backend cron and server operations. |
-| `GOOGLE_CLIENT_ID` | **Yes** | Google OAuth Client ID for login and identity verification. |
-| `GOOGLE_CLIENT_SECRET` | **Yes** | Google OAuth Client Secret. |
-| `TELEGRAM_BOT_TOKEN` | Optional | Telegram Bot token from `@BotFather` for Telegram Login Widget. |
-| `NEXT_PUBLIC_TELEGRAM_BOT_USERNAME` | Optional | Username of your Telegram Bot. |
-| `GEMINI_API_KEY` | **Yes** | Google AI Studio API key for real-time meal & calorie analysis. |
-| `GEMINI_MODEL` | **Yes** | Model identifier (defaults to `gemini-2.5-flash`). |
-| `GOOGLE_FIT_CLIENT_ID` | Optional | Google Cloud OAuth ID with Fitness API enabled for step sync. |
-| `GOOGLE_FIT_CLIENT_SECRET` | Optional | Google Cloud OAuth Secret for Google Fit. |
-| `NEXT_PUBLIC_WINTER_ARC_START_DATE` | **Yes** | Start date in `YYYY-MM-DD` format (e.g., `2026-10-01`). |
-| `NEXT_PUBLIC_MIN_COMMITMENTS` | **Yes** | Minimum tasks required to enter challenge (Default: `5`). |
-| `NEXT_PUBLIC_MAX_COMMITMENTS` | **Yes** | Maximum tasks permitted in the commitment gateway (Default: `20`). |
+Discipline is reinforced when witnessed by others:
+- **Public Challenger Directory (`/app/members`)**: View all registered participants, their current challenge day, total commitments, and daily progress.
+- **Individual Spectator Profiles (`/app/members/[userId]`)**: Inspect a friend's full pledge list, task completion rate, and verified habits.
+- **One-Click Arena Invite**: Share direct links with friends and workout partners to compete side-by-side.
 
 ---
 
-## 🔌 API & Hardware Integrations
+## 📊 Records Analytics & Historical Ledger
 
-### 1. Google Gemini Flash (Nutrition Engine)
-The platform uses the Gemini Live / Flash API to provide instant nutritional calculations without manual database entry.
-```typescript
-import { GoogleGenAI } from '@google/genai';
-
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
-export async function parseMealNutrition(mealDescription: string) {
-  const response = await ai.models.generateContent({
-    model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
-    contents: `Analyze this meal: "${mealDescription}". 
-    Return valid JSON with: { "items": [{"name": string, "calories": number, "protein": number, "carbs": number, "fats": number}], "total_calories": number }`,
-    config: { responseMimeType: 'application/json' }
-  });
-  return JSON.parse(response.text);
-}
-```
-
-### 2. Web Bluetooth API (Smartwatch Sync)
-Enables pairing directly with Bluetooth Low Energy (BLE) smartwatches and heart rate monitors:
-```typescript
-async function connectHeartRateMonitor() {
-  const device = await navigator.bluetooth.requestDevice({
-    filters: [{ services: ['heart_rate'] }]
-  });
-  const server = await device.gatt.connect();
-  const service = await server.getPrimaryService('heart_rate');
-  const characteristic = await service.getCharacteristic('heart_rate_measurement');
-  
-  await characteristic.startNotifications();
-  characteristic.addEventListener('characteristicvaluechanged', (event) => {
-    const value = event.target.value;
-    const heartRate = value.getUint8(1);
-    console.log(`Live Heart Rate: ${heartRate} BPM`);
-  });
-}
-```
-
-### 3. Google Fit REST API (Pedometer Auto-Sync)
-Fetches daily aggregated step count using the Google Fitness REST endpoint (`https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate`), keeping the top-bar step counter continuously synchronized.
+- **All-Time Activity Ledger (`/app/records`)**: Consolidated historical records tracking your transformation across all 90 days.
+- **Deep-Dive Metric Views (`/app/records/[activity]`)**: Detailed interactive charts for Sleep, Screen Time, Diet, Study, Gym, and Tasks powered by Recharts.
+- **Streak & Consistency Metrics**: Track current unbroken streaks and all-time discipline compliance.
 
 ---
 
-## ⏱️ The Midnight Lock Rule (Discipline Enforcement)
+## 🎨 Visual & Typography Design System
 
-To uphold the core philosophy of the Winter Arc, the application enforces automated daily locks:
-1. **Tasks & Routines:** Every day at **00:00 (12:00 AM)** local time, all uncompleted tasks for the preceding date are tagged with `is_locked = TRUE`.
-2. **Sleep Times:** Once entered and confirmed, sleep & wake times cannot be modified after the grace period.
-3. **Audit Trails:** Edits, deletions, or retroactive completions are barred by PostgreSQL RLS constraints.
-
----
-
-## 🤝 Contributing
-
-Contributions to improve performance, enhance wearable compatibility, or expand exam syllabi are welcome:
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/NewFeature`)
-3. Commit your Changes (`git commit -m 'Add NewFeature'`)
-4. Push to the Branch (`git push origin feature/NewFeature`)
-5. Open a Pull Request
+- **Neo-Brutalist Tactical Dark Aesthetic**: High-contrast `#08090B` deep black background accented with `#CCFF00` Tactical Neon and `#4FD1FF` Cyan.
+- **Authentic Custom Typography**:
+  - **Display / Headers**: `Anton` & `Impact` for powerful, athletic, militaristic impact.
+  - **Body / Interface**: `Plus Jakarta Sans` for clean, contemporary legibility.
+  - **Metrics / Timers**: `JetBrains Mono` for precise, technical, digital readouts.
+- **Spatial Floating Dock**: Glassmorphic bottom navigation dock providing instantaneous thumb access across all devices.
 
 ---
 
-## 📄 License
+## 🛠️ Technology Stack
 
-Distributed under the MIT License. See `LICENSE` for more information.
+| Layer | Technology | Purpose |
+|---|---|---|
+| **Frontend Framework** | **Next.js 14 (App Router)** | Server & Client Components, React 18, Static Page Generation |
+| **Styling & Motion** | **Tailwind CSS + Framer Motion** | Ultra-responsive layout, smooth animations, dynamic states |
+| **Typography** | **Google Fonts via Next Font** | Self-hosted `Anton`, `Plus Jakarta Sans`, and `JetBrains Mono` |
+| **Cloud Database** | **Supabase (PostgreSQL + RLS)** | Real-time cloud storage, Row Level Security, public ledgers |
+| **Authentication** | **Supabase Auth + Google OAuth** | Verified Google login and automatic profile picture sync |
+| **Artificial Intelligence** | **Google Gemini 2.5 Flash** | Sub-second nutrition macro estimation with triple-key failover |
+| **Hardware Protocol** | **Web Bluetooth API (GATT)** | Direct smartwatch & chest strap heart rate streaming |
+| **Deployment** | **Vercel Edge Network** | Global CDN distribution with automated CI/CD push deployments |
 
 ---
 
-<div align="center">
-  <sub>Built with relentless discipline for the Winter Arc. Stay focused.</sub>
-</div>
+## 🏁 How to Join the Arena
+
+1. Visit **[https://winterarc-phi.vercel.app/](https://winterarc-phi.vercel.app/)**.
+2. Click **SIGN IN WITH GOOGLE** to authenticate with your verified Google account.
+3. Pledge your **5 compulsory non-negotiable rules** on the Commitment Gatekeeper screen.
+4. Step into your **Cockpit** and conquer the next 90 days.
+
+---
+
+*Discipline Over Motivation. No Excuses. Supreme Consistency.*
