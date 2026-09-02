@@ -1,0 +1,16 @@
+{
+  "name": "Winter Arc Challenge",
+  "short_name": "WinterArc",
+  "description": "The Ultimate Social Accountability Platform for your Winter Arc",
+  "start_url": "/app/individual",
+  "display": "standalone",
+  "background_color": "#08090B",
+  "theme_color": "#08090B",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
