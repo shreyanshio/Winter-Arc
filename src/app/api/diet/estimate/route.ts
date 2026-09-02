@@ -19,10 +19,27 @@ export async function POST(req: NextRequest) {
 
     // Input length cap for security
     const cleanText = items_text.trim().slice(0, 500);
-    const apiKey = process.env.GEMINI_API_KEY;
 
-    // If Gemini API key is available and configured
-    if (apiKey && !apiKey.includes('YourGeminiApiKey')) {
+    // Collect all available Gemini API keys for automatic failover/rotation
+    const rawKeys = [
+      process.env.GEMINI_API_KEY,
+      process.env.GEMINI_API_KEY_2,
+      process.env.GEMINI_API_KEY_3,
+    ].filter(Boolean) as string[];
+
+    const apiKeys: string[] = [];
+    for (const k of rawKeys) {
+      for (const part of k.split(',')) {
+        const trimmed = part.trim();
+        if (trimmed && !trimmed.includes('YourGeminiApiKey') && !apiKeys.includes(trimmed)) {
+          apiKeys.push(trimmed);
+        }
+      }
+    }
+
+    // Try each API key in order (automatic failover if one key runs out of quota)
+    for (let i = 0; i < apiKeys.length; i++) {
+      const apiKey = apiKeys[i];
       try {
         const ai = new GoogleGenAI({ apiKey });
         const modelName = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
@@ -59,12 +76,12 @@ Do not include markdown backticks or any preamble, only valid JSON.`;
           fat_g: Math.round(Number(parsed.fat_g) || 12),
           one_line_summary: parsed.one_line_summary || `Nutritional estimate for: ${cleanText.slice(0, 50)}`,
         });
-      } catch (geminiErr) {
-        console.warn('Gemini API call returned error, using nutritional heuristic fallback:', geminiErr);
+      } catch (geminiErr: any) {
+        console.warn(`Gemini API key #${i + 1} exhausted or failed. Rotating to next key if available:`, geminiErr?.message || geminiErr);
       }
     }
 
-    // Heuristic fallback if API key is not yet set or during offline testing
+    // Heuristic fallback if all API keys fail or during offline testing
     const wordCount = cleanText.split(/\s+/).length;
     const baseCalories = Math.max(180, Math.min(1200, 200 + wordCount * 65));
     const protein = Math.round(baseCalories * 0.06);
