@@ -68,33 +68,24 @@ export default function LandingPage() {
             </span>
           </Link>
 
-          {/* Quick Page Links */}
-          <nav className="flex items-center gap-1.5 p-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
-            <Link
-              href="/"
-              className="px-3.5 py-1.5 text-xs font-mono font-bold uppercase rounded-full bg-neon text-black"
+          {/* Header Right: Status & Quick Sign In */}
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08]">
+              <span className="w-2 h-2 rounded-full bg-neon animate-ping" />
+              <span className="text-[11px] font-mono text-gray-400 uppercase tracking-wider">
+                90-DAY ARENA LIVE
+              </span>
+            </div>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={handleGoogleLogin}
+              isLoading={isLoading}
+              className="bg-neon text-black font-extrabold hover:bg-neon-hover border-neon font-mono text-xs uppercase px-4 h-9 shadow-[0_0_15px_rgba(204,255,0,0.25)]"
             >
-              Home
-            </Link>
-            <Link
-              href="/app/individual"
-              className="px-3.5 py-1.5 text-xs font-mono font-bold uppercase rounded-full text-gray-300 hover:text-white hover:bg-white/[0.06] transition-all"
-            >
-              Cockpit
-            </Link>
-            <Link
-              href="/app/members"
-              className="px-3.5 py-1.5 text-xs font-mono font-bold uppercase rounded-full text-gray-300 hover:text-white hover:bg-white/[0.06] transition-all"
-            >
-              Members
-            </Link>
-            <Link
-              href="/app/records"
-              className="px-3.5 py-1.5 text-xs font-mono font-bold uppercase rounded-full text-gray-300 hover:text-white hover:bg-white/[0.06] transition-all"
-            >
-              Records
-            </Link>
-          </nav>
+              Sign In
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -127,26 +118,20 @@ export default function LandingPage() {
             Sign in with your Google account. Your official name and Google profile picture (PFP) are automatically synced to Supabase database. Zero fake AI entries, zero mock tasks.
           </p>
 
-          {/* Quick Page Jump Chips */}
-          <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-            <Link href="/app/individual">
-              <Button variant="secondary" size="sm" className="text-xs font-mono gap-1.5 border-white/20 hover:border-neon hover:text-neon">
-                <LayoutDashboard className="w-3.5 h-3.5 text-neon" />
-                <span>Go to Cockpit</span>
-              </Button>
-            </Link>
-            <Link href="/app/members">
-              <Button variant="secondary" size="sm" className="text-xs font-mono gap-1.5 border-white/20 hover:border-neon hover:text-neon">
-                <Users className="w-3.5 h-3.5 text-primary" />
-                <span>Members Arena</span>
-              </Button>
-            </Link>
-            <Link href="/app/records">
-              <Button variant="secondary" size="sm" className="text-xs font-mono gap-1.5 border-white/20 hover:border-neon hover:text-neon">
-                <BarChart3 className="w-3.5 h-3.5 text-amber-400" />
-                <span>Records Ledger</span>
-              </Button>
-            </Link>
+          {/* Secure Platform Value Badges */}
+          <div className="flex flex-wrap gap-2.5 justify-center lg:justify-start">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-gray-300">
+              <Shield className="w-4 h-4 text-primary shrink-0" />
+              <span>Verified Members Only</span>
+            </div>
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-gray-300">
+              <Flame className="w-4 h-4 text-neon shrink-0" />
+              <span>Strict Midnight Task Lock</span>
+            </div>
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-gray-300">
+              <Zap className="w-4 h-4 text-amber-400 shrink-0" />
+              <span>Zero Mock AI Metrics</span>
+            </div>
           </div>
         </div>
 

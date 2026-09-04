@@ -18,8 +18,7 @@
 *.pem
 
 # Local env files
-.env*.local
-.env
+.env*
 
 # Vercel
 .vercel

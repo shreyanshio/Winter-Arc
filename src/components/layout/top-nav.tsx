@@ -12,7 +12,7 @@ import { AvatarBadge } from '@/components/ui/avatar-badge';
 
 export function TopNav() {
   const pathname = usePathname();
-  const { profile, logout } = useAuth();
+  const { user, profile, logout } = useAuth();
   const { setDrawerOpen } = useUIStore();
 
   const currentDay = calculateChallengeDay(profile?.challenge_started_at, profile?.timezone);
@@ -29,15 +29,17 @@ export function TopNav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Left: Brand + Hamburger + Day Counter */}
         <div className="flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setDrawerOpen(true)}
-            className="text-gray-300 hover:text-white"
-            title="Open Modules Drawer"
-          >
-            <Menu className="w-5 h-5" />
-          </Button>
+          {user && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setDrawerOpen(true)}
+              className="text-gray-300 hover:text-white"
+              title="Open Modules Drawer"
+            >
+              <Menu className="w-5 h-5" />
+            </Button>
+          )}
 
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-lg bg-neon/10 border border-neon/40 flex items-center justify-center text-neon group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(204,255,0,0.25)]">
@@ -48,34 +50,45 @@ export function TopNav() {
             </span>
           </Link>
 
-          {/* Day N Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon/10 border border-neon/30 shadow-[0_0_15px_rgba(204,255,0,0.15)]">
-            <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse" />
-            <span className="text-xs font-mono font-bold text-neon tracking-wider uppercase">
-              DAY {currentDay}
-            </span>
-          </div>
+          {/* Day N Badge (Only when authenticated) */}
+          {user && (
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon/10 border border-neon/30 shadow-[0_0_15px_rgba(204,255,0,0.15)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse" />
+              <span className="text-xs font-mono font-bold text-neon tracking-wider uppercase">
+                DAY {currentDay}
+              </span>
+            </div>
+          )}
         </div>
 
-        {/* Center: Navigation Tabs */}
-        <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
-          {tabs.map((tab) => {
-            const isActive = tab.href === '/' ? pathname === '/' : pathname.startsWith(tab.match);
-            return (
-              <Link
-                key={tab.name}
-                href={tab.href}
-                className={`px-4 py-1.5 text-xs font-bold rounded-full transition-all uppercase tracking-wider font-mono ${
-                  isActive
-                    ? 'bg-neon text-black shadow-[0_0_15px_rgba(204,255,0,0.25)]'
-                    : 'text-gray-400 hover:text-white hover:bg-white/[0.04]'
-                }`}
-              >
-                {tab.name}
-              </Link>
-            );
-          })}
-        </nav>
+        {/* Center: Navigation Tabs (Only when authenticated) */}
+        {user ? (
+          <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
+            {tabs.map((tab) => {
+              const isActive = tab.href === '/' ? pathname === '/' : pathname.startsWith(tab.match);
+              return (
+                <Link
+                  key={tab.name}
+                  href={tab.href}
+                  className={`px-4 py-1.5 text-xs font-bold rounded-full transition-all uppercase tracking-wider font-mono ${
+                    isActive
+                      ? 'bg-neon text-black shadow-[0_0_15px_rgba(204,255,0,0.25)]'
+                      : 'text-gray-400 hover:text-white hover:bg-white/[0.04]'
+                  }`}
+                >
+                  {tab.name}
+                </Link>
+              );
+            })}
+          </nav>
+        ) : (
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08]">
+            <span className="w-2 h-2 rounded-full bg-neon animate-ping" />
+            <span className="text-[11px] font-mono text-gray-400 uppercase tracking-wider">
+              OFFICIAL ARENA • GOOGLE SIGN-IN REQUIRED
+            </span>
+          </div>
+        )}
 
         {/* Right: User Profile & Actions */}
         <div className="flex items-center gap-3">

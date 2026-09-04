@@ -39,6 +39,10 @@ export default function MembersDirectoryPage() {
 
   useEffect(() => {
     async function loadRealMembers() {
+      if (!currentProfile) {
+        setIsLoading(false);
+        return;
+      }
       setIsLoading(true);
 
       if (!supabase) {

@@ -26,13 +26,20 @@ const POPULAR_SUGGESTIONS = [
 
 export default function OnboardingPage() {
   const router = useRouter();
-  const { user, profile, commitments: existingCommitments, updateProfile, refreshUserData } = useAuth();
+  const { user, profile, commitments: existingCommitments, updateProfile, refreshUserData, isLoading: authLoading } = useAuth();
   const supabase = createClient();
 
   const [inputCommitment, setInputCommitment] = useState('');
   const [commitmentsList, setCommitmentsList] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  // Unauthenticated guard: Must be logged in
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace('/');
+    }
+  }, [user, authLoading, router]);
 
   // Initialize with existing commitments if already saved
   useEffect(() => {

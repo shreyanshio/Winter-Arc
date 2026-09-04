@@ -31,11 +31,14 @@ const DOCK_ITEMS = [
   { name: 'Records', href: '/app/records', icon: BarChart3 },
 ];
 
+import { useAuth } from '@/lib/auth-context';
+
 export function SpatialDock() {
   const pathname = usePathname();
+  const { user } = useAuth();
 
-  // Hide only on login and onboarding
-  if (pathname === '/login' || pathname === '/onboarding') return null;
+  // Hide when not signed in, or on public landing, login, and onboarding screens
+  if (!user || pathname === '/' || pathname === '/login' || pathname === '/onboarding') return null;
 
   return (
     <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1.5rem)]">

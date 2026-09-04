@@ -39,6 +39,10 @@ export default function MemberSpectatorPage() {
 
   useEffect(() => {
     async function loadFriendProfile() {
+      if (!myProfile) {
+        setLoading(false);
+        return;
+      }
       setLoading(true);
 
       if (!supabase) {
